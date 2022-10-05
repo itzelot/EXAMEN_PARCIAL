@@ -1,0 +1,31 @@
+extends ./layout/index.pug 
+block compartircontenido 
+    main.container.mt-5
+        h1.text.center.mt-5 #{pagina} 
+        .row 
+            .col-md-12 
+                h2.d.block.w-100.text-center Agregar Habitaciones 
+                if (errores) 
+                    each error in errores 
+                        .alert.col.alert-danger.text-center=error.mensaje 
+
+            .row.justify-content-center.col 
+                .col-md-8 
+                    form(action = "/habitaciones" method="POST")
+                        .form-group 
+                            label(for="id") id 
+                            input#correo(type="test",placeholder="identificador",name="id",class="form-control",value=id,readonly="readonly")
+                        .form-group 
+                            label(for="piso") Piso 
+                            input#piso(type="text",placeholder="Piso",name="piso",class="form-control",value=piso)
+                        .form-group 
+                            label(for="nombre") Nombre 
+                            input#nombre(type="text",placeholder="Nombre",name="nombre",class="form-control",value=nombre)
+                        .form-group 
+                            label(for="refrigerador") Refrigerador 
+                            input#refrigerador(type="text",placeholder="Refrigerador",name="refrigerador",class="form-control",value=refrigerador)
+                        .form-group 
+                            label(for="id_htl") id_htl 
+                            input#id_grt(type="test",placeholder="identificador",name="id_grt",class="form-control",value=id_grt,readonly="readonly")
+
+                        input.btn.btn-success.btn-block(type="submit")

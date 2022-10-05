@@ -1,0 +1,60 @@
+extends ./layout/index.pug 
+block compartircontenido 
+    main.container.mt-5
+        h1.text.center.mt-5 #{pagina} 
+        .row 
+            .col-md-12 
+                h2.d.block.w-100.text-center Agregar Hotel 
+                if (errores) 
+                    each error in errores 
+                        .alert.col.alert-danger.text-center=error.mensaje 
+
+            .row.justify-content-center.col 
+                .col-md-8 
+                    form(action = "/hoteles" method="POST")
+                        .form-group 
+                            label(for="id_htl") id 
+                            input#correo(type="test",placeholder="identificador",name="id_htl",class="form-control",value=id_htl,readonly="readonly")
+                        .form-group 
+                            label(form="imagen") Imagen  
+                            select#imagen(type="textbox",name="imagen",class="form-control",value=imagen)
+                                option()  imagen1 
+                                option()  imagen2 
+                        .form-group 
+                            label(for="nombre") Nombre 
+                            input#nombre(type="text",placeholder="Nombre del Hotel",name="nombre",class="form-control",value=nombre)
+                        .form-group 
+                            label(for="direccion") Direccion 
+                            input#direccion(type="text",placeholder="Direccion del Hotel",name="direccion",class="form-control",value=direccion)
+                        .form-group 
+                            label(for="telefono") Telefono 
+                            input#telefono(type="text",placeholder="Telfono del Hotel",name="telefono",class="form-control",value=telefono)
+                        .form-group 
+                            label(for="correo") Correo 
+                            input#correo(type="text",placeholder="Correo del Hotel",name="correo",class="form-control",value=correo)
+                        .form-group 
+                            label(for="id_grt") id_grt 
+                            input#id_grt(type="test",placeholder="identificador",name="id_grt",class="form-control",value=id_grt,readonly="readonly")
+                            a(href='#', class='btn btn-success btn-clock') Agregar Gerente
+
+                        input.btn.btn-success.btn-block(type="submit")
+        
+        blockquote
+        section 
+        blockquote 
+        h2.d.block.w-100.text-center Hoteles disponibles     
+            .row 
+                each hoteles in hotel
+                    .col-md.col-lg-4.mv-4 
+                        .card 
+                            img.card-img-top(src=`img/${hoteles.imagen}.png`)
+                            .card-body
+                                h4.card-title(style='font-size:1rem') #{hoteles.id_htl}
+                                h4.card-title(style='font-size:1rem') #{hoteles.nombre}
+                                h4.card-title(style='font-size:1rem') #{hoteles.direccion}
+                                h4.card-title(style='font-size:1rem') #{hoteles.telefono}
+                                h4.card-title() #{hotel.correo}
+                                p.card-text(style='font-size:1.2rem') #{hoteles.id_grt} 
+                                a(href=`/modificar?id=${hoteles.id_htl}`, class='btn btn-success btn-clock') Modificar
+                                |
+                                a(href=`/eliminar?id=${hoteles.id_htl}`, class='btn btn-danger btn-clock') Eliminar
